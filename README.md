@@ -1,7 +1,8 @@
 <!-- Hướng dẫn chạy -->
 
-B1: Sửa đổi mật khẩu kết nối tới db trong application.properties
-B2: chạy lênh spring-boot:run
+B1: Tạo database có tên trùng với tên trong application.properties
+B2: Sửa đổi mật khẩu kết nối tới db trong application.properties
+B3: chạy lệnh mvn spring-boot:run
 
 <!-- Khi phát triển tính năng mới-->
 
