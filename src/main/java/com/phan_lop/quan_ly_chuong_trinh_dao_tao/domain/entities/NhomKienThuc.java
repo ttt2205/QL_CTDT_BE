@@ -8,9 +8,12 @@ import com.phan_lop.quan_ly_chuong_trinh_dao_tao.utils.JsonConverter;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -36,6 +39,16 @@ public class NhomKienThuc {
     @Column(name = "ten_nhom", nullable = false)
     private String tenNhom;
 
+    @Column(name = "tich_luy", nullable = false)
+    private boolean tichLuy;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "khoi_kien_thuc_id", nullable = false)
+    private KhoiKienThuc khoiKienThuc;
+
+    @Column(name = "so_tin_chi_tu_chon_toi_thieu", nullable = true)
+    private int soTinhChiTuChonToiThieu;
+
     @Column(name = "status", nullable = false)
     private boolean status;
 
@@ -51,23 +64,12 @@ public class NhomKienThuc {
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted = false;
 
-    @Column(name = "created_by", columnDefinition = "JSON", nullable = true)
-    @Convert(converter = JsonConverter.class)
-    private Map<String, Object> createdBy;
-
-    @Column(name = "updated_by", columnDefinition = "JSON", nullable = true)
-    @Convert(converter = JsonConverter.class)
-    private Map<String, Object> updatedBy;
-
-    @Column(name = "deleted_by", columnDefinition = "JSON", nullable = true)
-    @Convert(converter = JsonConverter.class)
-    private Map<String, Object> deletedBy;
-
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
         this.status = true;
+        this.isDeleted = false;
     }
 
     @PreUpdate
@@ -78,6 +80,5 @@ public class NhomKienThuc {
     public void softDelete(Map<String, Object> updatedByUser) {
         this.deletedAt = LocalDateTime.now();
         this.isDeleted = true;
-        this.deletedBy = updatedByUser;
     }
 }

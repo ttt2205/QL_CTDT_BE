@@ -34,16 +34,15 @@ public class KeHoachDayHoc {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "thong_tin_chung_id", nullable = false)
-    private ThongTinChung thongTinChung;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hoc_phan_id", nullable = false)
     private HocPhan hocPhan;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "nhom_kien_thuc_id", nullable = false)
     private NhomKienThuc nhomKienThuc;
+
+    @Column(name = "bat_buoc", nullable = false)
+    private boolean batBuoc;
 
     @Column(name = "hoc_ky", nullable = false)
     private int hocKy;
@@ -66,23 +65,12 @@ public class KeHoachDayHoc {
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted = false;
 
-    @Column(name = "created_by", columnDefinition = "JSON", nullable = true)
-    @Convert(converter = JsonConverter.class)
-    private Map<String, Object> createdBy;
-
-    @Column(name = "updated_by", columnDefinition = "JSON", nullable = true)
-    @Convert(converter = JsonConverter.class)
-    private Map<String, Object> updatedBy;
-
-    @Column(name = "deleted_by", columnDefinition = "JSON", nullable = true)
-    @Convert(converter = JsonConverter.class)
-    private Map<String, Object> deletedBy;
-
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
         this.status = true;
+        this.isDeleted = false;
     }
 
     @PreUpdate
@@ -93,6 +81,5 @@ public class KeHoachDayHoc {
     public void softDelete(Map<String, Object> updatedByUser) {
         this.deletedAt = LocalDateTime.now();
         this.isDeleted = true;
-        this.deletedBy = updatedByUser;
     }
 }
