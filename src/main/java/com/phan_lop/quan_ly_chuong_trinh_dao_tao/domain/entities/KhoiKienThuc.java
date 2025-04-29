@@ -3,10 +3,7 @@ package com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.entities;
 import java.time.LocalDateTime;
 import java.util.Map;
 
-import com.phan_lop.quan_ly_chuong_trinh_dao_tao.utils.JsonConverter;
-
 import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -14,7 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -28,24 +25,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "de_cuong_chi_tiet")
-public class DeCuongChiTiet {
+@Table(name = "khoi_kien_thuc")
+public class KhoiKienThuc {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "name", nullable = false, unique = true)
+    private String name;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "hoc_phan_id", nullable = false)
-    private HocPhan hocPhan;
-
-    @Column(name = "ten_cot_diem", nullable = false)
-    private String tenCotDiem;
-
-    @Column(name = "trong_so", nullable = false)
-    private Double trongSo;
-
-    @Column(name = "hinh_thuc", nullable = false)
-    private String hinhThuc;
+    @JoinColumn(name = "thong_tin_chung_id", nullable = false)
+    private ThongTinChung thongTinChung;
 
     @Column(name = "status", nullable = false)
     private boolean status;

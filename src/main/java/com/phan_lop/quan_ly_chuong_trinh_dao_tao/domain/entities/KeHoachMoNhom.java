@@ -37,20 +37,31 @@ public class KeHoachMoNhom {
     @JoinColumn(name = "hoc_phan_id", nullable = false)
     private HocPhan hocPhan;
 
-    @Column(name = "nam_hoc", nullable = false)
-    private String namHoc;
+    // @Column(name = "nam_hoc", nullable = false)
+    // private String namHoc;
 
-    @Column(name = "hoc_ky", nullable = false)
-    private int hocKy;
+    // @Column(name = "hoc_ky", nullable = false)
+    // private int hocKy;
 
-    @Column(name = "so_luong_sv", nullable = false)
-    private int soLuongSV;
+    @Column(name = "he_so", nullable = false)
+    private int heSo;
 
-    @Column(name = "thoi_gian_bat_dau", updatable = false, columnDefinition = "DATETIME(6)")
-    private LocalDateTime thoiGianBatDau;
+    @Column(name = "khoa", nullable = false)
+    private String khoa;
 
-    @Column(name = "thoi_gian_ket_thuc", updatable = false, columnDefinition = "DATETIME(6)")
-    private LocalDateTime thoiGianKetThuc;
+    @Column(name = "tong_so_nhom", nullable = false)
+    private int tongSoNhom;
+
+    @Column(name = "tong_so_sinh_vien", nullable = false)
+    private int tongSoSinhVien;
+
+    // @Column(name = "thoi_gian_bat_dau", updatable = false, columnDefinition =
+    // "DATETIME(6)")
+    // private LocalDateTime thoiGianBatDau;
+
+    // @Column(name = "thoi_gian_ket_thuc", updatable = false, columnDefinition =
+    // "DATETIME(6)")
+    // private LocalDateTime thoiGianKetThuc;
 
     @Column(name = "status", nullable = false)
     private boolean status;
@@ -67,23 +78,12 @@ public class KeHoachMoNhom {
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted = false;
 
-    @Column(name = "created_by", columnDefinition = "JSON", nullable = true)
-    @Convert(converter = JsonConverter.class)
-    private Map<String, Object> createdBy;
-
-    @Column(name = "updated_by", columnDefinition = "JSON", nullable = true)
-    @Convert(converter = JsonConverter.class)
-    private Map<String, Object> updatedBy;
-
-    @Column(name = "deleted_by", columnDefinition = "JSON", nullable = true)
-    @Convert(converter = JsonConverter.class)
-    private Map<String, Object> deletedBy;
-
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
         this.status = true;
+        this.isDeleted = false;
     }
 
     @PreUpdate
@@ -94,6 +94,5 @@ public class KeHoachMoNhom {
     public void softDelete(Map<String, Object> updatedByUser) {
         this.deletedAt = LocalDateTime.now();
         this.isDeleted = true;
-        this.deletedBy = updatedByUser;
     }
 }

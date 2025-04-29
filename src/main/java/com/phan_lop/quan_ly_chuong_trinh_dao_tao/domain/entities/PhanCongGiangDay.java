@@ -41,8 +41,17 @@ public class PhanCongGiangDay {
     @JoinColumn(name = "ke_hoach_mo_nhom_id", nullable = false)
     private KeHoachMoNhom keHoachMoNhom;
 
-    @Column(name = "so_tiet", nullable = false)
-    private int soTiet;
+    @Column(name = "so_nhom", nullable = false)
+    private int soNhom;
+
+    @Column(name = "hoc_ky_day", nullable = false)
+    private int hocKyDay;
+
+    @Column(name = "loai", nullable = false)
+    private String loai;
+
+    @Column(name = "so_tiet_thuc_hien", nullable = false)
+    private int soTietThucHien;
 
     @Column(name = "status", nullable = false)
     private boolean status;
@@ -59,23 +68,12 @@ public class PhanCongGiangDay {
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted = false;
 
-    @Column(name = "created_by", columnDefinition = "JSON", nullable = true)
-    @Convert(converter = JsonConverter.class)
-    private Map<String, Object> createdBy;
-
-    @Column(name = "updated_by", columnDefinition = "JSON", nullable = true)
-    @Convert(converter = JsonConverter.class)
-    private Map<String, Object> updatedBy;
-
-    @Column(name = "deleted_by", columnDefinition = "JSON", nullable = true)
-    @Convert(converter = JsonConverter.class)
-    private Map<String, Object> deletedBy;
-
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
         this.status = true;
+        this.isDeleted = false;
     }
 
     @PreUpdate
@@ -86,6 +84,5 @@ public class PhanCongGiangDay {
     public void softDelete(Map<String, Object> updatedByUser) {
         this.deletedAt = LocalDateTime.now();
         this.isDeleted = true;
-        this.deletedBy = updatedByUser;
     }
 }

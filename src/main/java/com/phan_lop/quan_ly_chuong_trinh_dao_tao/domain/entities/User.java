@@ -36,20 +36,20 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "ho_ten", nullable = false)
-    private String hoTen;
+    // @Column(name = "ho_ten", nullable = false)
+    // private String hoTen;
 
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "sdt", nullable = true)
-    private String sdt;
+    @Column(name = "so_dien_thoai", nullable = true)
+    private String soDienThoai;
 
-    @Column(name = "vai_tro", nullable = false)
-    private String vaiTro;
+    @Column(name = "role", nullable = false)
+    private String role;
 
-    @Column(name = "nam_sinh", nullable = true)
-    private int namSinh;
+    // @Column(name = "nam_sinh", nullable = true)
+    // private int namSinh;
 
     @Column(name = "status", nullable = false)
     private boolean status;
@@ -66,23 +66,12 @@ public class User {
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted = false;
 
-    @Column(name = "created_by", columnDefinition = "JSON", nullable = true)
-    @Convert(converter = JsonConverter.class)
-    private Map<String, Object> createdBy;
-
-    @Column(name = "updated_by", columnDefinition = "JSON", nullable = true)
-    @Convert(converter = JsonConverter.class)
-    private Map<String, Object> updatedBy;
-
-    @Column(name = "deleted_by", columnDefinition = "JSON", nullable = true)
-    @Convert(converter = JsonConverter.class)
-    private Map<String, Object> deletedBy;
-
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
         this.status = true;
+        this.isDeleted = false;
     }
 
     @PreUpdate
@@ -93,6 +82,5 @@ public class User {
     public void softDelete(Map<String, Object> updatedByUser) {
         this.deletedAt = LocalDateTime.now();
         this.isDeleted = true;
-        this.deletedBy = updatedByUser;
     }
 }
