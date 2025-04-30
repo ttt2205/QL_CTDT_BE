@@ -36,6 +36,12 @@ public class GiangVien {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Column(name = "ten")
+    private String ten;
+
+    @Column(name = "chuc_danh")
+    private String chucDanh;
+
     @Column(name = "bo_mon")
     private String boMon;
 
@@ -63,23 +69,12 @@ public class GiangVien {
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted = false;
 
-    @Column(name = "created_by", columnDefinition = "JSON", nullable = true)
-    @Convert(converter = JsonConverter.class)
-    private Map<String, Object> createdBy;
-
-    @Column(name = "updated_by", columnDefinition = "JSON", nullable = true)
-    @Convert(converter = JsonConverter.class)
-    private Map<String, Object> updatedBy;
-
-    @Column(name = "deleted_by", columnDefinition = "JSON", nullable = true)
-    @Convert(converter = JsonConverter.class)
-    private Map<String, Object> deletedBy;
-
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
         this.status = true;
+        this.isDeleted = false;
     }
 
     @PreUpdate
@@ -90,6 +85,5 @@ public class GiangVien {
     public void softDelete(Map<String, Object> updatedByUser) {
         this.deletedAt = LocalDateTime.now();
         this.isDeleted = true;
-        this.deletedBy = updatedByUser;
     }
 }

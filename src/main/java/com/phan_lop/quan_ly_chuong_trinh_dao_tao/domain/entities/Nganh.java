@@ -3,9 +3,7 @@ package com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.entities;
 import java.time.LocalDateTime;
 import java.util.Map;
 
-import com.phan_lop.quan_ly_chuong_trinh_dao_tao.utils.JsonConverter;
 import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -50,23 +48,12 @@ public class Nganh {
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted = false;
 
-    @Column(name = "created_by", columnDefinition = "JSON", nullable = true)
-    @Convert(converter = JsonConverter.class)
-    private Map<String, Object> createdBy;
-
-    @Column(name = "updated_by", columnDefinition = "JSON", nullable = true)
-    @Convert(converter = JsonConverter.class)
-    private Map<String, Object> updatedBy;
-
-    @Column(name = "deleted_by", columnDefinition = "JSON", nullable = true)
-    @Convert(converter = JsonConverter.class)
-    private Map<String, Object> deletedBy;
-
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
         this.status = true;
+        this.isDeleted = false;
     }
 
     @PreUpdate
@@ -77,6 +64,5 @@ public class Nganh {
     public void softDelete(Map<String, Object> updatedByUser) {
         this.deletedAt = LocalDateTime.now();
         this.isDeleted = true;
-        this.deletedBy = updatedByUser;
     }
 }
