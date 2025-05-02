@@ -1,22 +1,12 @@
 package com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.utils.JsonConverter;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -37,14 +27,11 @@ public class KeHoachMoNhom {
     @JoinColumn(name = "hoc_phan_id", nullable = false)
     private HocPhan hocPhan;
 
-    // @Column(name = "nam_hoc", nullable = false)
-    // private String namHoc;
-
-    // @Column(name = "hoc_ky", nullable = false)
-    // private int hocKy;
+    @OneToMany(mappedBy = "keHoachMoNhom", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<PhanCongGiangDay> phanCongGiangDay;
 
     @Column(name = "he_so", nullable = false)
-    private int heSo;
+    private double heSo;
 
     @Column(name = "khoa", nullable = false)
     private String khoa;
@@ -55,13 +42,8 @@ public class KeHoachMoNhom {
     @Column(name = "tong_so_sinh_vien", nullable = false)
     private int tongSoSinhVien;
 
-    // @Column(name = "thoi_gian_bat_dau", updatable = false, columnDefinition =
-    // "DATETIME(6)")
-    // private LocalDateTime thoiGianBatDau;
-
-    // @Column(name = "thoi_gian_ket_thuc", updatable = false, columnDefinition =
-    // "DATETIME(6)")
-    // private LocalDateTime thoiGianKetThuc;
+    @Column(name = "namHoc", nullable = false, length = 50)
+    private String namHoc;
 
     @Column(name = "status", nullable = false)
     private boolean status;

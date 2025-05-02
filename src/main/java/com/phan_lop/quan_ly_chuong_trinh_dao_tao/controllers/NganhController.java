@@ -1,5 +1,6 @@
 package com.phan_lop.quan_ly_chuong_trinh_dao_tao.controllers;
 
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,6 +34,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("/api/v1/nganh")
+// @AllArgsConstructor
 @RequiredArgsConstructor
 public class NganhController {
 
