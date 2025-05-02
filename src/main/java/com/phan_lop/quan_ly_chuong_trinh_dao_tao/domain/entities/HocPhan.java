@@ -34,7 +34,7 @@ public class HocPhan {
     private String tenHocPhan;
 
     @Column(name = "so_tin_chi", nullable = false)
-    private int soTinChi;
+    private int soTinChi = 0;
 
     @Column(name = "so_tiet_ly_thuyet", nullable = false)
     private int soTietLyThuyet;
