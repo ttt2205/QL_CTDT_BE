@@ -6,18 +6,18 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
-@Mapper(componentModel = "spring", uses = {GiangVienMapper.class})
+@Mapper(componentModel = "spring", uses = { GiangVienMapper.class })
 public interface PhanCongGiangDayMapper {
 
-    @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "updatedAt", ignore = true)
+    // @Mapping(target = "createdAt", ignore = true)
+    // @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "soTietThucTe", source = ".", qualifiedByName = "tinhSoTietThucTe")
     @Mapping(target = "nhom", source = ".", qualifiedByName = "xacDinhNhom")
     PhanCongGiangDayResDto entityToDto(PhanCongGiangDay entity);
 
     @Named("tinhSoTietThucTe")
     default int tinhSoTietThucTe(PhanCongGiangDay entity) {
-        return (int)Math.round(entity.getSoTietThucHien() * entity.getKeHoachMoNhom().getHeSo());
+        return (int) Math.round(entity.getSoTietThucHien() * entity.getKeHoachMoNhom().getHeSo());
     }
 
     @Named("xacDinhNhom")
@@ -29,7 +29,7 @@ public interface PhanCongGiangDayMapper {
         } else if (entity.getLoai().equals("Bai tap")) {
             return entity.getSoNhom() + " BT";
         }
-        return entity.getSoNhom()+"";
+        return entity.getSoNhom() + "";
     }
 
 }

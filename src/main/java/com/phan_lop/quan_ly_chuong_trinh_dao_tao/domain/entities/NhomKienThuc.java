@@ -1,6 +1,7 @@
 package com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.utils.JsonConverter;
@@ -14,6 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -41,6 +43,9 @@ public class NhomKienThuc {
 
     @Column(name = "tich_luy", nullable = false)
     private boolean tichLuy;
+
+    @OneToMany(mappedBy = "nhomKienThuc", fetch = FetchType.LAZY)
+    private List<KeHoachDayHoc> listKeHoachDayHoc;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "khoi_kien_thuc_id", nullable = false)

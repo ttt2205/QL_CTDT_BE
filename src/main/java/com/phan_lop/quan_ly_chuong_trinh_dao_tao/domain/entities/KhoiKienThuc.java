@@ -1,6 +1,7 @@
 package com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 import jakarta.persistence.Column;
@@ -37,6 +38,9 @@ public class KhoiKienThuc {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "thong_tin_chung_id", nullable = false)
     private ThongTinChung thongTinChung;
+
+    @OneToMany(mappedBy = "khoiKienThuc", fetch = FetchType.LAZY)
+    private List<NhomKienThuc> listNhomKienThuc;
 
     @Column(name = "status", nullable = false)
     private boolean status;

@@ -35,7 +35,7 @@ public class ThongTinChung {
     private Nganh nganh;
 
     @Column(name = "gioi_thieu", nullable = true)
-    private String gioiThieu;
+    private String gioiThieu = "";
 
     @Column(name = "khoa_quan_ly", nullable = true)
     private String khoaQuanLy;
@@ -56,7 +56,7 @@ public class ThongTinChung {
     private String website;
 
     @Column(name = "thoi_gian_dao_tao", nullable = true)
-    private Long thoiGianDaoTao;
+    private Double thoiGianDaoTao;
 
     @Column(name = "ban_hanh", nullable = true)
     private String banHanh;
