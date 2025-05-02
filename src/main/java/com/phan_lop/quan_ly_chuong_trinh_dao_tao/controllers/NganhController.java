@@ -1,9 +1,6 @@
 package com.phan_lop.quan_ly_chuong_trinh_dao_tao.controllers;
 
-import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.NganhDto;
-import com.phan_lop.quan_ly_chuong_trinh_dao_tao.services.NganhService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 @AllArgsConstructor
 public class NganhController {
 
-    private NganhService nganhService;
-
     @GetMapping
     public ResponseEntity<?> getMethodName(
             @RequestParam(defaultValue = "0") int page,
@@ -38,7 +33,7 @@ public class NganhController {
 
     @GetMapping("{maNganh}")
     public ResponseEntity<?> getByMaNganh(@PathVariable String maNganh) {
-        return new ResponseEntity<>(nganhService.getByMaNganh(maNganh), HttpStatusCode.valueOf(200));
+        return null;
     }
 
     @PutMapping("{id}")

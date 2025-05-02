@@ -3,9 +3,7 @@ package com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.entities;
 import java.time.LocalDateTime;
 import java.util.Map;
 
-import com.phan_lop.quan_ly_chuong_trinh_dao_tao.utils.JsonConverter;
 import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -86,4 +84,5 @@ public class GiangVien {
         this.deletedAt = LocalDateTime.now();
         this.isDeleted = true;
     }
+
 }

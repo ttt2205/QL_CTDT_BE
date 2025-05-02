@@ -2,21 +2,11 @@ package com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.entities;
 
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.TimeZone;
 
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.utils.JsonConverter;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,17 +17,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "phan_cong_giang_day")
+@Table(name = "phan_cong_giang_day", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"giang_vien_id", "ke_hoach_mo_nhom_id", "hoc_ky_day"})
+})
 public class PhanCongGiangDay {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "giang_vien_id", nullable = false)
     private GiangVien giangVien;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "ke_hoach_mo_nhom_id", nullable = false)
     private KeHoachMoNhom keHoachMoNhom;
 
