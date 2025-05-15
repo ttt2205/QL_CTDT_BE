@@ -15,6 +15,7 @@ public class KeHoachMoNhomResDto {
     private String khoa;
     private int tongSoNhom;
     private int tongSoSinhVien;
+    private int soSinhVien1Nhom;
     private String namHoc;
     private boolean status;
     private HocPhanResDto hocPhan;

@@ -6,6 +6,10 @@ import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.entities.PhanCongGiangDa
 import java.util.List;
 
 public interface PhanCongGiangDayService {
+    PhanCongGiangDay findById(Long id);
     List<PhanCongGiangDay> getByKeHoachMoNhomId(Long keHoachMoNhomId);
     PhanCongGiangDay addPhanCongGiangDay(PhanCongGiangDayReqDto reqDto);
+    void softDeleteById(Long id);
+    void hardDeleteById(Long id);
+    PhanCongGiangDay updateById(Long id, PhanCongGiangDayReqDto reqDto);
 }

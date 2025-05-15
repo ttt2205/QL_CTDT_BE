@@ -23,7 +23,7 @@ public class PhanCongGiangDayReqDto {
     @Max(value = 3, message = "Hoc ki phải tu 1 den 3")
     private int hocKyDay;
 
-    @Pattern(regexp = "^(LyThuyet|ThucHanh|BaiTap|TatCa)$", message = "Loai must have value LyThuyet|ThucHanh|BaiTap|TatCa")
+    @Pattern(regexp = "^(Ly thuyet|Thuc hanh|Bai tap|Tat ca)$", message = "Loai must be Ly thuyet|Thuc hanh|Bai tap|Tat ca")
     private String loai;
 
     @Min(value = 1, message = "So tiet thuc hien phai lon hon 0")

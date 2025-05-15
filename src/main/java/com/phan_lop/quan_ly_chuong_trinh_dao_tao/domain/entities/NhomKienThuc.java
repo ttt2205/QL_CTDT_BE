@@ -6,19 +6,7 @@ import java.util.Map;
 
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.utils.JsonConverter;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -44,7 +32,7 @@ public class NhomKienThuc {
     @Column(name = "tich_luy", nullable = false)
     private boolean tichLuy;
 
-    @OneToMany(mappedBy = "nhomKienThuc", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "nhomKienThuc", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<KeHoachDayHoc> listKeHoachDayHoc;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -52,7 +40,7 @@ public class NhomKienThuc {
     private KhoiKienThuc khoiKienThuc;
 
     @Column(name = "so_tin_chi_tu_chon_toi_thieu", nullable = true)
-    private int soTinhChiTuChonToiThieu;
+    private int soTinChiTuChonToiThieu;
 
     @Column(name = "status", nullable = false)
     private boolean status;

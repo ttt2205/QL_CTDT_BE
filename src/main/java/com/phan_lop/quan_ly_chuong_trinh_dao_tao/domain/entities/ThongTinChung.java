@@ -1,19 +1,10 @@
 package com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,6 +24,9 @@ public class ThongTinChung {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "nganh_id", nullable = false)
     private Nganh nganh;
+
+    @OneToMany(mappedBy = "thongTinChung", fetch = FetchType.LAZY)
+    private List<KhoiKienThuc> listKhoiKienThuc;
 
     @Column(name = "gioi_thieu", nullable = true)
     private String gioiThieu = "";

@@ -1,7 +1,7 @@
 package com.phan_lop.quan_ly_chuong_trinh_dao_tao.controllers;
 
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.response.HocPhanResDto;
-import com.phan_lop.quan_ly_chuong_trinh_dao_tao.mapper.HocPhanMapper;
+import com.phan_lop.quan_ly_chuong_trinh_dao_tao.mappers.HocPhanMapper;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.services.HocPhanService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;

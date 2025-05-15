@@ -1,8 +1,9 @@
 package com.phan_lop.quan_ly_chuong_trinh_dao_tao.controllers;
 
+import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.ApiResponse;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.request.KeHoachMoNhomReqDto;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.response.KeHoachMoNhomResDto;
-import com.phan_lop.quan_ly_chuong_trinh_dao_tao.mapper.KeHoachMoNhomMapper;
+import com.phan_lop.quan_ly_chuong_trinh_dao_tao.mappers.KeHoachMoNhomMapper;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.services.KeHoachMoNhomService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -21,9 +22,9 @@ public class KeHoachMoNhomController {
     @Qualifier("keHoachMoNhomMapper")
     private KeHoachMoNhomMapper mapper;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<KeHoachMoNhomResDto> findById(@PathVariable Long id) {
-        KeHoachMoNhomResDto khDto = mapper.entityToDto(keHoachMoNhomService.findById(id));
+    @GetMapping("/{keHoachMoNhomId}")
+    public ResponseEntity<KeHoachMoNhomResDto> findById(@PathVariable Long keHoachMoNhomId) {
+        KeHoachMoNhomResDto khDto = mapper.entityToResDto(keHoachMoNhomService.findById(keHoachMoNhomId));
         return ResponseEntity.ok(khDto);
     }
 
@@ -36,19 +37,19 @@ public class KeHoachMoNhomController {
     public ResponseEntity<KeHoachMoNhomResDto> addKeHoachMoNhom(@RequestBody KeHoachMoNhomReqDto reqDto) {
         return ResponseEntity.ok(keHoachMoNhomService.add(reqDto));
     }
-//
-//    @GetMapping("{id}")
-//    public ResponseEntity<?> getByIdMethodName(@PathVariable Long id) {
-//        return null;
-//    }
-//
-//    @PutMapping("{id}")
-//    public ResponseEntity<?> putMethodName(@PathVariable Long id, @RequestBody String entity) {
-//        return null;
-//    }
-//
-//    @DeleteMapping("{id}")
-//    public ResponseEntity<?> deleteMethodName(@PathVariable Long id) {
-//        return null;
-//    }
+
+    @PutMapping("/{keHoachMoNhomId}")
+    public ResponseEntity<KeHoachMoNhomResDto> updateById(@PathVariable Long keHoachMoNhomId, @RequestBody KeHoachMoNhomReqDto reqDto) {
+        KeHoachMoNhomResDto khDto = mapper.entityToResDto(keHoachMoNhomService.update(keHoachMoNhomId, reqDto));
+        return ResponseEntity.ok(khDto);
+    }
+
+    @DeleteMapping("{keHoachMoNhomId}")
+    public ResponseEntity<ApiResponse<?>> deleteById(@PathVariable Long keHoachMoNhomId) {
+        keHoachMoNhomService.deleteById(keHoachMoNhomId);
+        return ResponseEntity.ok(ApiResponse.builder()
+                .statusCode(200)
+                .message("Delete keHoachMoNhom successfully")
+                .build());
+    }
 }

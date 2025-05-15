@@ -17,7 +17,7 @@ public class KeHoachMoNhomReqDto {
     private String khoa;
 
     @NotBlank(message = "Năm học không được để trống")
-    @Pattern(regexp = "\\d{4}-\\d{4}", message = "Năm học phải có định dạng 'yyyy-yyyy'")
+    @Pattern(regexp = "2\\d{3}-2\\d{3}", message = "Năm học phải có định dạng 'yyyy-yyyy'")
     private String namHoc;
 
     @Min(value = 1, message = "Tổng số nhóm phải lớn hơn 0")

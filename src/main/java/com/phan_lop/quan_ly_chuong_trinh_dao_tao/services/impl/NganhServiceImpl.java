@@ -1,8 +1,6 @@
 package com.phan_lop.quan_ly_chuong_trinh_dao_tao.services.impl;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,7 +13,7 @@ import org.springframework.util.MultiValueMap;
 
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.NganhDto;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.entities.Nganh;
-import com.phan_lop.quan_ly_chuong_trinh_dao_tao.exceptions.CustomException;
+import com.phan_lop.quan_ly_chuong_trinh_dao_tao.exception.CustomException;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.repositories.NganhRepository;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.repositories.specification.NganhSpecification;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.services.NganhService;
