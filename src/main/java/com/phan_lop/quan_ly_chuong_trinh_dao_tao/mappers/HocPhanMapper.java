@@ -1,4 +1,4 @@
-package com.phan_lop.quan_ly_chuong_trinh_dao_tao.mapper;
+package com.phan_lop.quan_ly_chuong_trinh_dao_tao.mappers;
 
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.response.HocPhanResDto;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.entities.HocPhan;

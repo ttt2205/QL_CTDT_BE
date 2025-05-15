@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PhanCongGiangDayRepository extends JpaRepository<PhanCongGiangDay, Long> {
-    Optional<List<PhanCongGiangDay>> findByKeHoachMoNhomId(Long keHoachMoNhomId);
-    boolean existsByGiangVienAndKeHoachMoNhomAndHocKyDay(GiangVien giangVien, KeHoachMoNhom keHoachMoNhom, int hocKyDay);
 
+    Optional<List<PhanCongGiangDay>> findByKeHoachMoNhomId(Long keHoachMoNhomId);
+    Optional<PhanCongGiangDay> findByGiangVienAndKeHoachMoNhomAndHocKyDay(GiangVien giangVien, KeHoachMoNhom keHoachMoNhom, int hocKyDay);
+    boolean existsByGiangVienAndKeHoachMoNhomAndHocKyDay(GiangVien giangVien, KeHoachMoNhom keHoachMoNhom, int hocKyDay);
 }

@@ -1,8 +1,7 @@
-package com.phan_lop.quan_ly_chuong_trinh_dao_tao.exceptions;
+package com.phan_lop.quan_ly_chuong_trinh_dao_tao.exception;
 
 import org.springframework.http.HttpStatusCode;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
