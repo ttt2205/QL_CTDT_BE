@@ -45,7 +45,7 @@ public class KeHoachDayHoc {
     private boolean batBuoc;
 
     @Column(name = "hoc_ky", nullable = false)
-    private int hocKy;
+    private String hocKy;
 
     @Column(name = "nam_hoc", nullable = false)
     private String namHoc;

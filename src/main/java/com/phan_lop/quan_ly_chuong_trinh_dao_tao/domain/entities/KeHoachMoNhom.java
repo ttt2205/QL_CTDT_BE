@@ -27,7 +27,7 @@ public class KeHoachMoNhom {
     @JoinColumn(name = "hoc_phan_id", nullable = false)
     private HocPhan hocPhan;
 
-    @OneToMany(mappedBy = "keHoachMoNhom", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "keHoachMoNhom", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<PhanCongGiangDay> phanCongGiangDay;
 
     @Column(name = "he_so", nullable = false)

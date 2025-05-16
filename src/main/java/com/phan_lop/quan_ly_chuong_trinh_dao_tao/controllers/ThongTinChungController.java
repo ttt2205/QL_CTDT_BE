@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.ApiResponse;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.ApiResponseListData;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.ChuongTrinhKhungDto;
-import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.ErrorResponse;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.ThongTinChungDto;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.entities.ThongTinChung;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.requests.ThongTinChungRequest;

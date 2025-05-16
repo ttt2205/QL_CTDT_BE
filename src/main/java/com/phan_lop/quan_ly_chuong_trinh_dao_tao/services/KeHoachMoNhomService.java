@@ -10,6 +10,7 @@ public interface KeHoachMoNhomService {
     List<KeHoachMoNhom> findByHocPhanId(Long hocPhanId);
     KeHoachMoNhom findById(Long id);
     List<KeHoachMoNhom> findAll();
-
+    void deleteById(Long id);
+    KeHoachMoNhom update(Long id, KeHoachMoNhomReqDto reqDto);
     KeHoachMoNhomResDto add(KeHoachMoNhomReqDto reqDto);
 }

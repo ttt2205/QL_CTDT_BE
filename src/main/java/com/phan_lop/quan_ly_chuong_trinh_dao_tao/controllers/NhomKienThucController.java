@@ -1,45 +1,52 @@
 package com.phan_lop.quan_ly_chuong_trinh_dao_tao.controllers;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.ApiResponse;
+import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.request.NhomKienThucReqDto;
+import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.response.NhomKienThucResDto;
+import com.phan_lop.quan_ly_chuong_trinh_dao_tao.services.KeHoachDayHocService;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/nhom-kien-thuc")
+@AllArgsConstructor
 public class NhomKienThucController {
-    @GetMapping
-    public ResponseEntity<?> getMethodName(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size,
-            @RequestParam MultiValueMap<String, String> params) {
-        return null;
-    }
+
+    private KeHoachDayHocService keHoachDayHocService;
 
     @PostMapping
-    public ResponseEntity<?> postMethodName(@RequestBody String entity) {
-        return null;
+    public ResponseEntity<ApiResponse<?>> createNhomKienThuc(@RequestBody NhomKienThucReqDto reqDto) {
+        keHoachDayHocService.createNhomKienThuc(reqDto);
+        return ResponseEntity.ok(ApiResponse.builder()
+                .statusCode(200)
+                .message("Tao khoi kien thuc thanh cong")
+                .build());
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<?> getByIdMethodName(@PathVariable Long id) {
-        return null;
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiResponse<?>> updateNhomKienThuc(@PathVariable Long id, @RequestBody NhomKienThucReqDto reqDto) {
+        keHoachDayHocService.updateNhomKienThuc(id, reqDto);
+        return ResponseEntity.ok(ApiResponse.builder()
+                .statusCode(200)
+                .message("Cap nhat khoi kien thuc thanh cong")
+                .build());
     }
 
-    @PutMapping("{id}")
-    public ResponseEntity<?> putMethodName(@PathVariable Long id, @RequestBody String entity) {
-        return null;
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse<?>> deleteNhomKienThuc(@PathVariable Long id) {
+        keHoachDayHocService.deleteNhomKienThuc(id);
+        return ResponseEntity.ok(ApiResponse.builder()
+                .statusCode(200)
+                .message("Xoa khoi kien thuc thanh cong")
+                .build());
+    }
+    
+    @GetMapping
+    public ResponseEntity<List<NhomKienThucResDto>> findAll() {
+        return ResponseEntity.ok(keHoachDayHocService.getAllNhomKienThuc());
     }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<?> deleteMethodName(@PathVariable Long id) {
-        return null;
-    }
 }

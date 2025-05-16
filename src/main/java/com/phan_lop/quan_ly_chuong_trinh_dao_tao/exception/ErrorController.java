@@ -1,4 +1,4 @@
-package com.phan_lop.quan_ly_chuong_trinh_dao_tao.controllers;
+package com.phan_lop.quan_ly_chuong_trinh_dao_tao.exception;
 
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -6,15 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
-import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.ApiResponse;
-import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.ErrorResponse;
 
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @ControllerAdvice
 @Slf4j
-@Order(2) // Ưu tiên kiểm tra cuối cùng
+@Order
 public class ErrorController {
 
     @ExceptionHandler(Exception.class)

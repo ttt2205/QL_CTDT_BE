@@ -1,23 +1,18 @@
 package com.phan_lop.quan_ly_chuong_trinh_dao_tao.services.impl;
 
-import java.lang.StackWalker.Option;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.MultiValueMap;
-import com.phan_lop.quan_ly_chuong_trinh_dao_tao.controllers.DeCuongChiTietController;
-import com.phan_lop.quan_ly_chuong_trinh_dao_tao.controllers.ThongTinChungController;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.ChuongTrinhKhungDto;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.ChuongTrinhKhungDto.NhomKienThucChuongTrinhKhung;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.entities.HocPhan;
@@ -27,7 +22,7 @@ import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.entities.Nganh;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.entities.NhomKienThuc;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.entities.ThongTinChung;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.requests.ThongTinChungRequest;
-import com.phan_lop.quan_ly_chuong_trinh_dao_tao.exceptions.CustomException;
+import com.phan_lop.quan_ly_chuong_trinh_dao_tao.exception.CustomException;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.repositories.HocPhanRepository;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.repositories.KeHoachDayHocRepository;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.repositories.KhoiKienThucRepository;

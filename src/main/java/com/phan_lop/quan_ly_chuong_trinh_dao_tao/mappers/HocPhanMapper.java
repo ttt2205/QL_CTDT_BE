@@ -1,5 +1,6 @@
-package com.phan_lop.quan_ly_chuong_trinh_dao_tao.mapper;
+package com.phan_lop.quan_ly_chuong_trinh_dao_tao.mappers;
 
+import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.HocPhanDto;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.response.HocPhanResDto;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.entities.HocPhan;
 import org.mapstruct.Mapper;
@@ -23,4 +24,6 @@ public interface HocPhanMapper {
     default List<HocPhanResDto> toListDto(List<HocPhan> entities) {
         return entities.stream().map(this::entityToDto).collect(Collectors.toList());
     }
+    HocPhan toEntity(HocPhanDto hocPhanDtoDto);
+    HocPhanDto toDto(HocPhan hp);
 }

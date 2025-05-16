@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 public class PhanCongGiangDayResDto {
     private Long id;
     private String nhom;
+    private int soNhom;
     private int hocKyDay;
     private String loai;
     private int soTietThucHien;

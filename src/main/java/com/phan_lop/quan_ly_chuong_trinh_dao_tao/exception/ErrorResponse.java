@@ -2,16 +2,14 @@ package com.phan_lop.quan_ly_chuong_trinh_dao_tao.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
-@Builder
+@Data
 @AllArgsConstructor
-@Getter
+@NoArgsConstructor
+@Builder
 public class ErrorResponse {
-    private int status;
+    private int statusCode; // "success" hoặc "error"
     private String message;
-    private LocalDateTime timestamp;
-    private String path;
 }
