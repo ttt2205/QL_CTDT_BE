@@ -66,6 +66,9 @@ public class GiangVien {
 
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted = false;
+    
+    @Column(name = "nam_sinh")
+    private Integer namSinh;
 
     @PrePersist
     protected void onCreate() {
