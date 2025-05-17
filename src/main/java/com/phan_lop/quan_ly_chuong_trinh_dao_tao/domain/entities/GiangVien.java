@@ -53,8 +53,6 @@ public class GiangVien {
     @Column(name = "chuyen_mon")
     private String chuyenMon;
 
-    @Column(name = "nam_sinh")
-    private int namSinh = 1990;
 
     @Column(name = "status", nullable = false)
     private boolean status;
@@ -70,6 +68,9 @@ public class GiangVien {
 
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted = false;
+    
+    @Column(name = "nam_sinh")
+    private Long namSinh;
 
     @PrePersist
     protected void onCreate() {

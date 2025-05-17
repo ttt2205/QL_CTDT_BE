@@ -16,5 +16,6 @@ public class GiangVienResDto {
     private String khoa;
     private String trinhDo;
     private String chuyenMon;
+    private int namSinh;
     private boolean status;
 }

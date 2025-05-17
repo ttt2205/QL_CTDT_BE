@@ -1,53 +1,76 @@
 package com.phan_lop.quan_ly_chuong_trinh_dao_tao.controllers;
 
+import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.response.GiangVienExportProjection;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.response.GiangVienResDto;
+import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.request.GiangVienReqDto;
+import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.entities.GiangVien;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.mappers.GiangVienMapper;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.services.GiangVienService;
-import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import org.springframework.http.HttpStatus;
 
 @RestController
-@RequestMapping("/api/v1/giang-vien")
-@AllArgsConstructor
+@RequestMapping("/api/giangvien")
+@RequiredArgsConstructor
 public class GiangVienController {
 
-    private GiangVienService giangVienService;
-    private GiangVienMapper giangVienMapper;
+    private final GiangVienService giangVienService;
+    private final GiangVienMapper giangVienMapper;
 
     @GetMapping
     public ResponseEntity<List<GiangVienResDto>> getAll() {
-        return ResponseEntity.ok(giangVienMapper.toListResDto(giangVienService.getAll()));
+        return ResponseEntity.ok(giangVienService.getAllActiveGiangViens());
     }
 
-    @PostMapping
-    public ResponseEntity<?> postMethodName(@RequestBody String entity) {
-        return null;
+    @GetMapping("/by-khoa/{khoa}")
+    public ResponseEntity<List<GiangVienResDto>> getByKhoa(@PathVariable String khoa) {
+        return ResponseEntity.ok(giangVienService.findByKhoa(khoa));
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<?> getByIdMethodName(@PathVariable Long id) {
-        return null;
+    @GetMapping("/search/{ten}")
+    public ResponseEntity<List<GiangVienResDto>> search(@PathVariable String ten) {
+        return ResponseEntity.ok(giangVienService.searchByTen(ten));
     }
 
-    @PutMapping("{id}")
-    public ResponseEntity<?> putMethodName(@PathVariable Long id, @RequestBody String entity) {
-        return null;
+    @GetMapping("/export/{khoa}")
+    public ResponseEntity<List<GiangVienExportProjection>> exportByKhoa(@PathVariable String khoa) {
+        return ResponseEntity.ok(giangVienService.getExportByKhoa(khoa));
     }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<?> deleteMethodName(@PathVariable Long id) {
-        return null;
+    @PostMapping("/them")
+    public ResponseEntity<?> addGiangVien(@Valid @RequestBody GiangVienReqDto dto) {
+        try {
+            giangVienService.addGiangVien(dto);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Thêm giảng viên thành công");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("statusCode", 500, "message", e.getMessage()));
+        }
+    }
+
+    @PutMapping("/delete/{id}")
+    public ResponseEntity<String> softDelete(@PathVariable Long id) {
+        giangVienService.deleteSoft(id);
+        return ResponseEntity.ok("Đã xoá mềm giảng viên");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Map<String, String>> updateGiangVien(@PathVariable Long id, @RequestBody GiangVien req) {
+        giangVienService.updateGiangVien(id, req);
+        return ResponseEntity.ok(Map.of("message", "Cập nhật thành công"));
+    }
+
+    // ⚠️ Đặt CUỐI CÙNG để tránh xung đột với các route như "/them", "/search/{ten}", ...
+@GetMapping("/api/giangvien/{id:\\d+}")
+    public ResponseEntity<GiangVien> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(giangVienService.findById(id));
     }
 }
+
