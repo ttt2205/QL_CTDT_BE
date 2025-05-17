@@ -7,6 +7,5 @@ import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.entities.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    // Custom query methods can be defined here if needed
-
+    boolean existsByEmail(String email);
 }
