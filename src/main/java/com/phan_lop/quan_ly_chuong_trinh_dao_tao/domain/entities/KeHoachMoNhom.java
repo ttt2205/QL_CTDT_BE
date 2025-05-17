@@ -3,6 +3,7 @@ package com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.entities;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.utils.JsonConverter;
 
@@ -17,7 +18,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "ke_hoach_mo_nhom")
+@Table(name = "ke_hoach_mo_nhom", uniqueConstraints = {
+        @UniqueConstraint(name="UK_HocPhan_NamHoc", columnNames = {"hoc_phan_id", "nam_hoc"})
+})
 public class KeHoachMoNhom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

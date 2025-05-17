@@ -84,4 +84,8 @@ public class HocPhan {
         this.isDeleted = true;
     }
 
+    public int getSoTietHocPhan() {
+        return soTietBaiTap + soTietThucHanh + soTietLyThuyet;
+    }
+
 }

@@ -47,9 +47,6 @@ public class KeHoachDayHoc {
     @Column(name = "hoc_ky", nullable = false)
     private String hocKy;
 
-    @Column(name = "nam_hoc", nullable = false)
-    private String namHoc;
-
     @Column(name = "status", nullable = false)
     private boolean status;
 

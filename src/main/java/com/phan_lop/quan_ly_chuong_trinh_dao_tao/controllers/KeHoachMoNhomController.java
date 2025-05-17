@@ -3,8 +3,10 @@ package com.phan_lop.quan_ly_chuong_trinh_dao_tao.controllers;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.ApiResponse;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.request.KeHoachMoNhomReqDto;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.response.KeHoachMoNhomResDto;
+import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.response.TongHopKeHoachMoNhom.TongHopKeHoachMoNhomDto;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.mappers.KeHoachMoNhomMapper;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.services.KeHoachMoNhomService;
+import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
@@ -29,8 +31,13 @@ public class KeHoachMoNhomController {
     }
 
     @GetMapping
-    public ResponseEntity<List<KeHoachMoNhomResDto>> getAll() {
-        return ResponseEntity.ok(mapper.toListDto(keHoachMoNhomService.findAll()));
+    public ResponseEntity<List<KeHoachMoNhomResDto>> getAllFiltered(@Nullable @RequestParam String keyword, @Nullable  @RequestParam String namHoc) {
+        return ResponseEntity.ok(mapper.toListDto(keHoachMoNhomService.search(keyword, namHoc)));
+    }
+
+    @GetMapping("/tongHopMauIn")
+    public ResponseEntity<List<TongHopKeHoachMoNhomDto>> getTongHopMauIn(@RequestParam String namHoc) {
+        return ResponseEntity.ok(keHoachMoNhomService.tongHopKeHoachMoNhom(namHoc));
     }
 
     @PostMapping

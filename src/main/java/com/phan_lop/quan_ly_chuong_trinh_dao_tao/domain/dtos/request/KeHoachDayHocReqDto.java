@@ -10,5 +10,4 @@ public class KeHoachDayHocReqDto {
     public int nhomKienThucId;
     public boolean batBuoc;
     public List<Integer> hocKi;
-    public String namHoc;
 }
