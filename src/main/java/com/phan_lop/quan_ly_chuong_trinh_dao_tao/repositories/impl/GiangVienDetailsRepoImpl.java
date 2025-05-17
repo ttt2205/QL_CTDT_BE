@@ -52,7 +52,7 @@ public class GiangVienDetailsRepoImpl implements GiangVienDetailsRepo {
                         ((Number) row[6]).intValue(),
                         ((Number) row[7]).longValue(),
                         (String) row[8],
-                        ((Number) row[9]).intValue(),
+                        ((Number) row[9]).longValue(),
                         (String) row[10],
                         (String) row[11]
                     );

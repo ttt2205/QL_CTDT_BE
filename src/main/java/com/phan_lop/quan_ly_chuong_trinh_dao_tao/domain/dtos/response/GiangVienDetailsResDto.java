@@ -13,13 +13,13 @@ public class GiangVienDetailsResDto {
     private int hk3;
     private Long giangVienId;
     private String tenGV;
-    private int namSinh;
+    private Long namSinh;
     private String chucDanh;
     private String khoa;
 
     public GiangVienDetailsResDto(Long maHP, String tenHP, int soTinChi, int soTiet,
                                int hk1, int hk2, int hk3, Long giangVienId,
-                               String tenGV, int namSinh, String chucDanh, String khoa) {
+                               String tenGV, Long namSinh, String chucDanh, String khoa) {
         this.maHP = maHP;
         this.tenHP = tenHP;
         this.soTinChi = soTinChi;

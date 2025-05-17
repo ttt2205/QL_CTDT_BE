@@ -68,7 +68,7 @@ public class GiangVien {
     private boolean isDeleted = false;
     
     @Column(name = "nam_sinh")
-    private Integer namSinh;
+    private Long namSinh;
 
     @PrePersist
     protected void onCreate() {
