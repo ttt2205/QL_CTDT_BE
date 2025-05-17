@@ -2,6 +2,7 @@ package com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.entities;
 
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -51,6 +52,9 @@ public class GiangVien {
 
     @Column(name = "chuyen_mon")
     private String chuyenMon;
+
+    @Column(name = "nam_sinh")
+    private int namSinh = 1990;
 
     @Column(name = "status", nullable = false)
     private boolean status;
