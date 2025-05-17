@@ -25,7 +25,6 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(CustomException.class)
     public ResponseEntity<ErrorResponse> handleErrorResponse(CustomException ex) {
-        
         ErrorResponse error = ErrorResponse.builder()
                 .statusCode(ex.getStatusCode())
                 .message(ex.getMessage())

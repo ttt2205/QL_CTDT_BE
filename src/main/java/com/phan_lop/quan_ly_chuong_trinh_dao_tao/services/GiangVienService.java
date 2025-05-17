@@ -1,9 +1,7 @@
 package com.phan_lop.quan_ly_chuong_trinh_dao_tao.services;
 
-import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.response.GiangVienExportProjection;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.response.GiangVienResDto;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.entities.GiangVien;
-import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.request.GiangVienReqDto;
 
 import java.util.List;
 
@@ -13,8 +11,6 @@ public interface GiangVienService {
     List<GiangVienResDto> findByKhoa(String khoa);
     void deleteSoft(Long id);
     void updateGiangVien(Long id, GiangVien updated);
-    void addGiangVien(GiangVienReqDto dto);
+    void addGiangVien(GiangVien giangVien);
     GiangVien findById(Long id);
-    List<GiangVienExportProjection> getExportByKhoa(String khoa);
-
 }

@@ -11,6 +11,4 @@ public interface GiangVienRepository extends JpaRepository<GiangVien, Long> {
     List<GiangVien> findByStatusTrue();
     List<GiangVien> findByStatusTrueAndKhoa(String khoa);
     List<GiangVien> findByStatusTrueAndTenContainingIgnoreCase(String ten);
-    boolean existsByUserId(Long userId);
-
 }
