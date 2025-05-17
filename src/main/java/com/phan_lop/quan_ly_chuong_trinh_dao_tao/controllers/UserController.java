@@ -1,45 +1,48 @@
 package com.phan_lop.quan_ly_chuong_trinh_dao_tao.controllers;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.phan_lop.quan_ly_chuong_trinh_dao_tao.services.UserService;
+import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.request.UserReqDto;
+import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.response.UserResDto;
+
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/user")
 public class UserController {
-    @GetMapping
-    public ResponseEntity<?> getMethodName(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size,
-            @RequestParam MultiValueMap<String, String> params) {
-        return null;
-    }
 
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
     @PostMapping
-    public ResponseEntity<?> postMethodName(@RequestBody String entity) {
-        return null;
+    public ResponseEntity<UserResDto> createUser(@RequestBody UserReqDto userReqDto) {
+        UserResDto createdUser = userService.createUser(userReqDto);
+        return ResponseEntity.ok(createdUser);
+    }
+    @GetMapping
+    public List<UserResDto> getAllUsers() {
+        return userService.getAllUsers();
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<?> getByIdMethodName(@PathVariable Long id) {
-        return null;
+    public ResponseEntity<UserResDto> getUserById(@PathVariable Long id) {
+        UserResDto user = userService.getUserById(id);
+        return ResponseEntity.ok(user);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<?> putMethodName(@PathVariable Long id, @RequestBody String entity) {
-        return null;
+    public ResponseEntity<UserResDto> updateUser(@PathVariable Long id, @RequestBody UserReqDto userReqDto) {
+        UserResDto updatedUser = userService.updateUser(id, userReqDto);
+        return ResponseEntity.ok(updatedUser);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<?> deleteMethodName(@PathVariable Long id) {
-        return null;
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return ResponseEntity.noContent().build();
     }
 }
