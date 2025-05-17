@@ -89,6 +89,7 @@ public class KeHoachMoNhomServiceImpl implements KeHoachMoNhomService {
         KeHoachMoNhom keHoachMoNhom = mapper.reqDtoToEntity(reqDto);
         HocPhan hp = hocPhanService.findByMaHocPhan(reqDto.getMaHocPhan());
         keHoachMoNhom.setHocPhan(hp);
+        keHoachMoNhom.setPhanCongGiangDay(List.of());
 
         try {
             KeHoachMoNhom result = repository.save(keHoachMoNhom);
@@ -169,54 +170,4 @@ public class KeHoachMoNhomServiceImpl implements KeHoachMoNhomService {
 
         return ketQua;
     }
-//
-//    public List<TongHopKeHoachMoNhomDto> tongHopKeHoachMoNhom(String namHoc) {
-//        List<KeHoachMoNhom> listKeHoachMoNhom = repository.findByNamHoc(namHoc);
-//        List<PhanCongGiangDay> listPhanCong = new ArrayList<>();
-//        listKeHoachMoNhom.forEach(keHoach -> {
-//            listPhanCong.addAll(keHoach.getPhanCongGiangDay());
-//        });
-//
-//        Map<AbstractMap.SimpleEntry<GiangVien, KeHoachMoNhom>, List<PhanCongGiangDay>> groupedMap = listPhanCong.stream()
-//                .collect(Collectors.groupingBy(
-//                        p -> new AbstractMap.SimpleEntry<>(p.getGiangVien(), p.getKeHoachMoNhom())
-//                ));
-//
-//        List<TongHopKeHoachMoNhomDto> ketQua = map.entrySet().stream().map(gvEntry -> {
-//            GiangVien gv = gvEntry.getKey();
-//            Map<KeHoachMoNhom, List<PhanCongGiangDay>> phanCongTheoKeHoach = gvEntry.getValue();
-//            List<TongHopPhanCongDto> listPhanCongDto = phanCongTheoKeHoach.entrySet().stream().map(entry-> {
-//                List<PhanCongGiangDay> phanCongs = entry.getValue();
-//
-//                //tong hop phan cong de tao TongHopPhanCong
-//                KeHoachMoNhom keHoachMoNhom = phanCongs.get(0).getKeHoachMoNhom();
-//                HocPhan hocPhan = phanCongs.get(0).getKeHoachMoNhom().getHocPhan();
-//                int soLuongNhom = phanCongs.stream().mapToInt(PhanCongGiangDay::getSoNhom).sum();
-//                List<Integer> hocKyDay = phanCongs.stream().map(PhanCongGiangDay::getHocKyDay).collect(Collectors.toList());
-//                int tongSoTiet = phanCongs.stream().mapToInt(PhanCongGiangDay::getSoTietThucHien).sum();
-//
-//                TongHopPhanCongDto phanCongDto = TongHopPhanCongDto.builder()
-//                        .maHocPhan(hocPhan.getMaHocPhan())
-//                        .tenHocPhan(hocPhan.getTenHocPhan())
-//                        .soTietHocPhan(hocPhan.getSoTietHocPhan())
-//                        .soTinChi(hocPhan.getSoTinChi())
-//                        .tongSoTietDay(tongSoTiet)
-//                        .hocKyDay(hocKyDay)
-//                        .soLuongNhomLop(soLuongNhom)
-//                        .build();
-//
-//                return phanCongDto;
-//            }).collect(Collectors.toList());
-//
-//            TongHopKeHoachMoNhomDto keHoachDto = TongHopKeHoachMoNhomDto.builder()
-//                    .giangVien(giangVienMapper.toTongHopGiangVienDto(gv))
-//                    .phanCongGiangDay(listPhanCongDto)
-//                    .build();
-//
-//            return keHoachDto;
-//        }).collect(Collectors.toList());
-//
-//        return ketQua;
-//    }
-
 }
