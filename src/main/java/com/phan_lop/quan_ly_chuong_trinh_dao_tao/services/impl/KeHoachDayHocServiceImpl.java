@@ -47,9 +47,13 @@ public class KeHoachDayHocServiceImpl implements KeHoachDayHocService {
     }
 
     @Override
+    @Transactional
     public boolean updateKeHoachDayHoc(Long id, KeHoachDayHocReqDto reqDto) {
         KeHoachDayHoc keHoachDayHoc = keHoachDayHocRepository.findById(id)
                     .orElseThrow(()->new BadRequestException("Ke hoach day hoc khong ton tai"));
+        NhomKienThuc oldNhomKienThuc = keHoachDayHoc.getNhomKienThuc();
+        HocPhan oldHocPhan = keHoachDayHoc.getHocPhan();
+        //update cac truong tu dto
         keHoachDayHocMapper.updateEntityFromDto(reqDto, keHoachDayHoc);
 
         HocPhan hocPhan = hocPhanRepository.findById((long)reqDto.getHocPhanId()).orElseThrow(()->new BadRequestException("Hoc phan khong ton tai"));
@@ -59,16 +63,40 @@ public class KeHoachDayHocServiceImpl implements KeHoachDayHocService {
         keHoachDayHoc.setHocPhan(hocPhan);
         keHoachDayHoc.setNhomKienThuc(nhomKienThuc);
 
-        String jsonHocKy = keHoachDayHocMapper.getStringHocKiFromReqDto(reqDto);
-        keHoachDayHoc.setHocKy(jsonHocKy);
+        keHoachDayHoc.setHocKy(keHoachDayHocMapper.getStringHocKiFromReqDto(reqDto));
 
         keHoachDayHocRepository.save(keHoachDayHoc);
+
+        //sau khi save ke hoach day hoc update so tin chi tu chon toi thieu cua nhom kien thuc
+        if(oldNhomKienThuc != nhomKienThuc) {
+            oldNhomKienThuc.getListKeHoachDayHoc().remove(keHoachDayHoc);
+        }
+        int soTinChiTuChonToiThieu = oldNhomKienThuc.getSoTinChiTuChonToiThieu();
+        int soTinChiTuChon = oldNhomKienThuc.getSoTinChiTuChon();
+        if(soTinChiTuChonToiThieu > soTinChiTuChon){
+            oldNhomKienThuc.setSoTinChiTuChonToiThieu(soTinChiTuChon);
+        }
+        nhomKienThucRepository.save(nhomKienThuc);
+
         return true;
     }
 
+
     @Override
+    @Transactional
     public boolean deleteKeHoachDayHoc(Long id) {
-        keHoachDayHocRepository.findById(id).orElseThrow(()->new BadRequestException("Ke hoach day hoc khong ton tai"));
+        KeHoachDayHoc keHoachDayHoc = keHoachDayHocRepository.findById(id).orElseThrow(
+                ()->new BadRequestException("Ke hoach day hoc khong ton tai"));
+        //update so tin chi tu chon toi thieu
+        NhomKienThuc nhomKienThuc = keHoachDayHoc.getNhomKienThuc();
+        nhomKienThuc.getListKeHoachDayHoc().remove(keHoachDayHoc);
+        int soTinChiTuChonToiThieu = nhomKienThuc.getSoTinChiTuChonToiThieu();
+        int soTinChiTuChon = nhomKienThuc.getSoTinChiTuChon();
+        if(soTinChiTuChonToiThieu > soTinChiTuChon){
+            nhomKienThuc.setSoTinChiTuChonToiThieu(soTinChiTuChon);
+        }
+        nhomKienThucRepository.save(nhomKienThuc);
+
         keHoachDayHocRepository.deleteById(id);
         return true;
     }
@@ -129,6 +157,11 @@ public class KeHoachDayHocServiceImpl implements KeHoachDayHocService {
         NhomKienThuc nhomKienThuc = nhomKienThucRepository.findById(id).orElseThrow(()-> new BadRequestException("Nhom kien thuc khong ton tai"));
         nhomKienThucMapper.updateEntityFromDto(nhomKienThucDto, nhomKienThuc);
 
+        int soTinChiTuChon = nhomKienThuc.getSoTinChiTuChon();
+        if(nhomKienThucDto.getSoTinChiTuChonToiThieu() > soTinChiTuChon) {
+            throw new BadRequestException("Số tín chỉ tự chọn tối thiểu vượt quá số tín chỉ tự chọn hiện có!");
+        }
+
         KhoiKienThuc khoiKienThuc = khoiKienThucRepository.findById((long)nhomKienThucDto.getKhoiKienThucId()).orElseThrow(()-> new BadRequestException("Khoi kien thuc khong ton tai"));
         nhomKienThuc.setKhoiKienThuc(khoiKienThuc);
 
@@ -139,6 +172,7 @@ public class KeHoachDayHocServiceImpl implements KeHoachDayHocService {
             throw new BadRequestException("Lỗi unique key");
         }
     }
+
 
     @Override
     public boolean deleteNhomKienThuc(Long nhomKienThucId) {
