@@ -29,16 +29,20 @@ public class DeCuongChiTietImpl implements DeCuongChiTietService {
 
     @Override
     public boolean deleteByHocPhanId(Long id) {
+        deCuongChiTietRepo.deleteByHocPhanId(id);
         return false;
     }
 
     @Override
     public boolean create(List<DeCuongChiTietDto> deCuongChiTieDtotList) {
         try {
-            Long hocPhanId = deCuongChiTieDtotList.get(0).getId();
-            Optional<HocPhan> hocPhanOptional = hocPhanRepo.findById(hocPhanId);
+            String maHocPhan = deCuongChiTieDtotList.get(0).getHocPhan().getMaHocPhan();
+            Optional<HocPhan> hocPhanOptional = hocPhanRepo.findByMaHocPhan(maHocPhan);
             if (hocPhanOptional.isEmpty()) {
-                throw new IllegalArgumentException("Không tìm thấy để thêm de cuong chi tiet với ID: " + hocPhanId);
+                throw new IllegalArgumentException("Không tìm thấy mã học phần để thêm de cuong chi tiet : " + maHocPhan);
+            }
+            if ( findByHocPhanId(hocPhanOptional.get().getId()).size() >= 1) {
+                throw new IllegalArgumentException("Mã học phần đã có de cuong chi tiet : " + maHocPhan);
             }
             HocPhan hocPhan = hocPhanOptional.get();
             for (DeCuongChiTietDto item : deCuongChiTieDtotList) {
@@ -61,9 +65,10 @@ public class DeCuongChiTietImpl implements DeCuongChiTietService {
     @Override
     public boolean update(Long hocPhanId, List<DeCuongChiTietDto> deCuongChiTietList) {
         try {
-            Optional<HocPhan> hocPhanOptional = hocPhanRepo.findById(hocPhanId);
+            String maHocPhan = deCuongChiTietList.get(0).getHocPhan().getMaHocPhan();
+            Optional<HocPhan> hocPhanOptional = hocPhanRepo.findByMaHocPhan(maHocPhan);
             if (hocPhanOptional.isEmpty()) {
-                throw new IllegalArgumentException("Không tìm thấy để thêm de cuong chi tiet với ID: " + hocPhanId);
+                throw new IllegalArgumentException("Không tìm thấy để thêm de cuong chi tiet với mã học phần: " + maHocPhan);
             }
             HocPhan hocPhan = hocPhanOptional.get();
             if ( deCuongChiTietList.isEmpty()) {

@@ -40,7 +40,7 @@ public class DeCuongChiTietController {
         deCuongChiTietService.create(deCuongChiTietDtoList);
         ApiResponse<HocPhanDto> apiRespone = ApiResponse.<HocPhanDto>builder()
                 .statusCode(HttpStatus.CREATED.value())
-                .message("Create hoc phan data success!")
+                .message("Create de cuong chi tiet data success!")
                 .build();
         return ResponseEntity.status(HttpStatus.CREATED).body(apiRespone);
     }
