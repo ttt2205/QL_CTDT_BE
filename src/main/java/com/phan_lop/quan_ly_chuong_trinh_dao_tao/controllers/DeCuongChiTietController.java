@@ -40,7 +40,7 @@ public class DeCuongChiTietController {
         deCuongChiTietService.create(deCuongChiTietDtoList);
         ApiResponse<HocPhanDto> apiRespone = ApiResponse.<HocPhanDto>builder()
                 .statusCode(HttpStatus.CREATED.value())
-                .message("Create hoc phan data success!")
+                .message("Create de cuong chi tiet data success!")
                 .build();
         return ResponseEntity.status(HttpStatus.CREATED).body(apiRespone);
     }
@@ -48,6 +48,17 @@ public class DeCuongChiTietController {
     @PutMapping("{id}")
     public ResponseEntity<?> putMethodName(@PathVariable Long id, @RequestBody List<DeCuongChiTietDto> deCuongChiTietDtoList) {
         deCuongChiTietService.update(id,deCuongChiTietDtoList);
+        ApiResponse<HocPhanDto> apiRespone = ApiResponse.<HocPhanDto>builder()
+                .statusCode(HttpStatus.CREATED.value())
+                .message("Update hoc phan data success!")
+                .build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(apiRespone);
+    }
+
+    @DeleteMapping("{hocPhanId}")
+    public ResponseEntity<?> deleteMethodName(@PathVariable Long hocPhanId) {
+        //xoa tat ca de cuong chi tiet theo hoc phan Id
+        deCuongChiTietService.deleteByHocPhanId(hocPhanId);
         ApiResponse<HocPhanDto> apiRespone = ApiResponse.<HocPhanDto>builder()
                 .statusCode(HttpStatus.CREATED.value())
                 .message("Update hoc phan data success!")
