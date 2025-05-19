@@ -54,4 +54,15 @@ public class DeCuongChiTietController {
                 .build();
         return ResponseEntity.status(HttpStatus.CREATED).body(apiRespone);
     }
+
+    @DeleteMapping("{hocPhanId}")
+    public ResponseEntity<?> deleteMethodName(@PathVariable Long hocPhanId) {
+        //xoa tat ca de cuong chi tiet theo hoc phan Id
+        deCuongChiTietService.deleteByHocPhanId(hocPhanId);
+        ApiResponse<HocPhanDto> apiRespone = ApiResponse.<HocPhanDto>builder()
+                .statusCode(HttpStatus.CREATED.value())
+                .message("Update hoc phan data success!")
+                .build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(apiRespone);
+    }
 }

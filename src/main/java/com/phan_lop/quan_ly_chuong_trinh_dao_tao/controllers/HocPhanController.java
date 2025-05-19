@@ -40,7 +40,10 @@ public class HocPhanController {
     public ResponseEntity<List<HocPhanResDto>> getAll() {
         return ResponseEntity.ok(mapper.toListDto(hocPhanService.getAll()));
     }
-
+    @GetMapping("/hocphan-exist-decuongchitiet")
+    public ResponseEntity<List<HocPhanResDto>> getdecuongchitiet() {
+        return ResponseEntity.ok(mapper.toListDto(hocPhanService.getHocPhanWithDeCuongChiTiet()));
+    }
     @GetMapping("/{hocPhanId}")
     public ResponseEntity<HocPhanResDto> getById(@PathVariable Long hocPhanId) {
         return ResponseEntity.ok(mapper.entityToDto(hocPhanService.findById(hocPhanId)));
