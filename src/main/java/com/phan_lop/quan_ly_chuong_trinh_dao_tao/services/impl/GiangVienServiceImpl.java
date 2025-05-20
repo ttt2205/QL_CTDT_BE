@@ -44,6 +44,11 @@ public class GiangVienServiceImpl implements GiangVienService {
         return giangVienMapper.toListResDto(giangVienRepository.findByStatusTrueAndKhoa(khoa));
     }
     
+        @Override
+    public List<GiangVienResDto> findByBoMon(String boMon) {
+        return giangVienMapper.toListResDto(giangVienRepository.findByStatusTrueAndBoMon(boMon));
+    }
+    
     @Override
     public GiangVien findById(Long id) {
         return giangVienRepository.findById(id)
@@ -71,9 +76,9 @@ public void updateGiangVien(Long id, GiangVien updated) {
 
 
     @Override
-    public List<GiangVienExportProjection> getExportByKhoa(String khoa) {
-        System.out.println("📥 Đang lấy danh sách export theo khoa: " + khoa);
-        return giangVienExportRepository.getExportByKhoa(khoa);
+    public List<GiangVienExportProjection> getExportByBoMon(String boMon) {
+        System.out.println("📥 Đang lấy danh sách export theo bộ môn: " + boMon);
+        return giangVienExportRepository.getExportByBoMon(boMon);
     }
     
     @Override

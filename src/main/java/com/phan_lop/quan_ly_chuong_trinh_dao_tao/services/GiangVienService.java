@@ -11,10 +11,11 @@ public interface GiangVienService {
     List<GiangVienResDto> getAllActiveGiangViens();
     List<GiangVienResDto> searchByTen(String ten);
     List<GiangVienResDto> findByKhoa(String khoa);
+    List<GiangVienResDto> findByBoMon(String boMon);
     void deleteSoft(Long id);
     void updateGiangVien(Long id, GiangVien updated);
     void addGiangVien(GiangVienReqDto dto);
     GiangVien findById(Long id);
-    List<GiangVienExportProjection> getExportByKhoa(String khoa);
+    List<GiangVienExportProjection> getExportByBoMon(String boMon);
 
 }

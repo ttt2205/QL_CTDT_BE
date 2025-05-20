@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 public interface GiangVienRepository extends JpaRepository<GiangVien, Long> {
     List<GiangVien> findByStatusTrue();
     List<GiangVien> findByStatusTrueAndKhoa(String khoa);
+    List<GiangVien> findByStatusTrueAndBoMon(String boMon);
     List<GiangVien> findByStatusTrueAndTenContainingIgnoreCase(String ten);
     boolean existsByUserId(Long userId);
 

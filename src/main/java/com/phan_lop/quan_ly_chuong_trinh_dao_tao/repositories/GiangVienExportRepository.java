@@ -25,16 +25,18 @@ public interface GiangVienExportRepository extends JpaRepository<GiangVien, Long
           gv.ten AS TenGV,
           gv.nam_sinh AS NamSinh,
           gv.chuc_danh AS ChucDanh,
-          gv.khoa AS Khoa
+          gv.khoa AS Khoa,
+          gv.trinh_do AS trinhDo
         FROM 
           phan_cong_giang_day pcgd
         JOIN ke_hoach_mo_nhom khmn ON khmn.id = pcgd.ke_hoach_mo_nhom_id 
         JOIN hoc_phan hp ON hp.id = khmn.hoc_phan_id 
         JOIN giang_vien gv ON gv.id = pcgd.giang_vien_id
         WHERE   
-          gv.khoa = :khoa AND pcgd.status = 1 AND gv.status = 1
+          gv.bo_mon = :boMon AND pcgd.status = 1 AND gv.status = 1
         GROUP BY   
-          hp.id, hp.ten_hoc_phan, hp.so_tin_chi, gv.id, gv.ten, gv.nam_sinh, gv.chuc_danh, gv.khoa
+          hp.id, hp.ten_hoc_phan, hp.so_tin_chi, gv.id, gv.ten, gv.nam_sinh, gv.chuc_danh, gv.khoa, gv.trinh_do
         """, nativeQuery = true)
-    List<GiangVienExportProjection> getExportByKhoa(@Param("khoa") String khoa);
+            
+    List<GiangVienExportProjection> getExportByBoMon(@Param("boMon") String boMon);
 }

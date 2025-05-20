@@ -16,10 +16,11 @@ public class GiangVienDetailsResDto {
     private Long namSinh;
     private String chucDanh;
     private String khoa;
+    private String trinhDo;
 
     public GiangVienDetailsResDto(Long maHP, String tenHP, int soTinChi, int soTiet,
                                int hk1, int hk2, int hk3, Long giangVienId,
-                               String tenGV, Long namSinh, String chucDanh, String khoa) {
+                               String tenGV, Long namSinh, String chucDanh, String khoa, String trinhDo) {
         this.maHP = maHP;
         this.tenHP = tenHP;
         this.soTinChi = soTinChi;
@@ -32,5 +33,6 @@ public class GiangVienDetailsResDto {
         this.namSinh = namSinh;
         this.chucDanh = chucDanh;
         this.khoa = khoa;
+        this.trinhDo = trinhDo;
     }
 }

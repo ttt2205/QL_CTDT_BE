@@ -25,13 +25,13 @@ public class GiangVienDetailsRepoImpl implements GiangVienDetailsRepo {
               SUM(CASE WHEN pcgd.hoc_ky_day = 1 THEN 1 ELSE 0 END), 
               SUM(CASE WHEN pcgd.hoc_ky_day = 2 THEN 1 ELSE 0 END), 
               SUM(CASE WHEN pcgd.hoc_ky_day = 3 THEN 1 ELSE 0 END), 
-              gv.id, gv.ten, gv.nam_sinh, gv.chuc_danh, gv.khoa 
+              gv.id, gv.ten, gv.nam_sinh, gv.chuc_danh, gv.khoa, gv.trinh_do
             FROM phan_cong_giang_day pcgd 
             JOIN ke_hoach_mo_nhom khmn ON khmn.id = pcgd.ke_hoach_mo_nhom_id 
             JOIN hoc_phan hp ON hp.id = khmn.hoc_phan_id 
             JOIN giang_vien gv ON gv.id = pcgd.giang_vien_id
             WHERE pcgd.giang_vien_id = :idGV AND pcgd.status = 1
-            GROUP BY hp.id, hp.ten_hoc_phan, hp.so_tin_chi, gv.id, gv.ten, gv.nam_sinh, gv.chuc_danh, gv.khoa
+            GROUP BY hp.id, hp.ten_hoc_phan, hp.so_tin_chi, gv.id, gv.ten, gv.nam_sinh, gv.chuc_danh, gv.khoa, gv.trinh_do
         """;
 
   try {
@@ -54,7 +54,8 @@ public class GiangVienDetailsRepoImpl implements GiangVienDetailsRepo {
                         (String) row[8],
                         ((Number) row[9]).longValue(),
                         (String) row[10],
-                        (String) row[11]
+                        (String) row[11],
+                        (String) row[12]
                     );
                 } catch (Exception innerEx) {
                     System.err.println("❌ Error mapping row: " + Arrays.toString(row));

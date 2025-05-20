@@ -33,15 +33,16 @@ public class GiangVienController {
         return ResponseEntity.ok(giangVienService.findByKhoa(khoa));
     }
 
+    @GetMapping("/export/{boMon}")
+public ResponseEntity<List<GiangVienExportProjection>> getByBoMon(@PathVariable String boMon) {
+        return ResponseEntity.ok(giangVienService.getExportByBoMon(boMon));
+    }
+    
     @GetMapping("/search/{ten}")
     public ResponseEntity<List<GiangVienResDto>> search(@PathVariable String ten) {
         return ResponseEntity.ok(giangVienService.searchByTen(ten));
     }
 
-    @GetMapping("/export/{khoa}")
-    public ResponseEntity<List<GiangVienExportProjection>> exportByKhoa(@PathVariable String khoa) {
-        return ResponseEntity.ok(giangVienService.getExportByKhoa(khoa));
-    }
 
     @PostMapping("/them")
     public ResponseEntity<?> addGiangVien(@Valid @RequestBody GiangVienReqDto dto) {
