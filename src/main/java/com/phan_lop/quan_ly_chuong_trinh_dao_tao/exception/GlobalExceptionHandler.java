@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Order(1)
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(BadRequestException.class)
+    @ExceptionHandler({BadRequestException.class, RuntimeException.class})
     public ResponseEntity<?> appException(BadRequestException e) {
         return new ResponseEntity<>(ErrorResponseV2.builder()
                 .message(e.getMessage())

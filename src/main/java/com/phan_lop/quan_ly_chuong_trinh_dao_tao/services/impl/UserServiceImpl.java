@@ -2,7 +2,9 @@ package com.phan_lop.quan_ly_chuong_trinh_dao_tao.services.impl;
 
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.request.UserReqDto;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.response.UserResDto;
+import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.entities.GiangVien;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.entities.User;
+import com.phan_lop.quan_ly_chuong_trinh_dao_tao.exception.BadRequestException;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.mappers.UserMapper;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.repositories.UserRepository;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.services.UserService;
@@ -66,6 +68,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(Long id) {
+
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy người dùng"));
         user.softDelete(null);
