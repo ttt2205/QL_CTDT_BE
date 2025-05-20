@@ -40,8 +40,8 @@ public class GiangVienServiceImpl implements GiangVienService {
     }
 
     @Override
-    public List<GiangVienResDto> findByKhoa(String khoa) {
-        return giangVienMapper.toListResDto(giangVienRepository.findByStatusTrueAndKhoa(khoa));
+    public List<GiangVienResDto> findByKhoa(String boMon) {
+        return giangVienMapper.toListResDto(giangVienRepository.findByStatusTrueAndBoMon(boMon));
     }
     
     @Override
