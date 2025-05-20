@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface HocPhanService {
     List<HocPhan> getAll();
+    List<HocPhan> getHocPhanWithDeCuongChiTiet();
     HocPhan findByMaHocPhan(String maHocPhan);
     HocPhan findById(Long id);
     boolean deleteById(Long id);

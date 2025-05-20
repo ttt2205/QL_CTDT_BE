@@ -1,6 +1,7 @@
 package com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.entities;
 
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,14 +13,6 @@ import java.time.LocalDateTime;
 import java.util.Map;
 
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.utils.JsonConverter;
-import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
 
 @Data
 @AllArgsConstructor
@@ -40,9 +33,6 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    // @Column(name = "ho_ten", nullable = false)
-    // private String hoTen;
-
     @Column(name = "email", nullable = false)
     private String email;
 
@@ -51,9 +41,6 @@ public class User {
 
     @Column(name = "role", nullable = false)
     private String role;
-
-    // @Column(name = "nam_sinh", nullable = true)
-    // private int namSinh;
 
     @Column(name = "status", nullable = false)
     private boolean status;

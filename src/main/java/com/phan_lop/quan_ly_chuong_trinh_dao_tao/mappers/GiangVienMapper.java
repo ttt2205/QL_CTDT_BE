@@ -7,6 +7,7 @@ import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.request.GiangVienRe
 import java.util.List;
 import java.util.stream.Collectors;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface GiangVienMapper {
@@ -16,7 +17,9 @@ public interface GiangVienMapper {
 
     // DTO → Entity (request - dùng khi tạo)
     GiangVien dtoToEntity(GiangVienReqDto dto);
-    
+
+    @Mapping(target = "hoVaTen", source = "ten")
+    @Mapping(target = "maGiangVien", source = "id")
     TongHopGiangVienDto toTongHopGiangVienDto(GiangVien giangVien);
 
     default List<GiangVienResDto> toListResDto(List<GiangVien> entities) {

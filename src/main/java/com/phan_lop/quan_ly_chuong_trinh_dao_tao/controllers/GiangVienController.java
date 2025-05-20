@@ -16,7 +16,7 @@ import java.util.Map;
 import org.springframework.http.HttpStatus;
 
 @RestController
-@RequestMapping("/api/giangvien")
+@RequestMapping("/api/v1/giang-vien")
 @RequiredArgsConstructor
 public class GiangVienController {
 

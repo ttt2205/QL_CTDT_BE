@@ -4,6 +4,7 @@ import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.HocPhanDto;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.entities.HocPhan;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.exception.BadRequestException;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.exception.CustomException;
+import com.phan_lop.quan_ly_chuong_trinh_dao_tao.repositories.DeCuongChiTietRepo;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.repositories.HocPhanRepo;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.services.HocPhanService;
 import lombok.AllArgsConstructor;
@@ -18,12 +19,16 @@ import java.util.Optional;
 public class HocPhanServiceImpl implements HocPhanService {
 
     private HocPhanRepo hocPhanRepo;
-
+    private DeCuongChiTietRepo deCuongChiTietRepo;
     @Override
     public List<HocPhan> getAll() {
         return hocPhanRepo.findAll();
     }
 
+
+    public List<HocPhan> getHocPhanWithDeCuongChiTiet() {
+        return hocPhanRepo.findHocPhanWithDeCuongChiTiet();
+    }
     @Override
     public HocPhan findByMaHocPhan(String maHocPhan) {
         return hocPhanRepo.findByMaHocPhan(maHocPhan).orElseThrow(() -> new BadRequestException("Ma hoc phan not existed"));
@@ -36,6 +41,7 @@ public class HocPhanServiceImpl implements HocPhanService {
 
     @Override
     public boolean deleteById(Long id) {
+        deCuongChiTietRepo.deleteByHocPhanId(id);
         hocPhanRepo.deleteById(id);
         return true;
     }

@@ -74,4 +74,14 @@ public class NhomKienThuc {
         this.deletedAt = LocalDateTime.now();
         this.isDeleted = true;
     }
+
+    public int getSoTinChiTuChon() {
+        //tinh tong so tin chi tu chon
+        NhomKienThuc nhomKienThuc = this;
+        int soTinChiTuChon = nhomKienThuc.getListKeHoachDayHoc().stream()
+                .filter(keHoachDayHoc -> !keHoachDayHoc.isBatBuoc()) // lọc môn tự chọn
+                .map(keHoachDayHoc -> keHoachDayHoc.getHocPhan().getSoTinChi()) // lấy số tín chỉ
+                .reduce(0, Integer::sum); // tính tổng
+        return soTinChiTuChon;
+    }
 }
