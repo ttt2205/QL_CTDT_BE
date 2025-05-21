@@ -19,11 +19,21 @@ public class ThongTinChungSpecification {
             predicates.add(cb.isFalse(root.get("isDeleted")));
 
             // Nếu có query name -> thêm điều kiện LIKE (phân biệt chữ thường/chữ hoa)
-            // if (params.containsKey("name")) {
-            // predicates.add(cb.like(
-            // cb.lower(root.get("roleName")),
-            // "%" + params.getFirst("name").toLowerCase() + "%"));
-            // }
+            if (params.containsKey("search") && !params.getFirst("search").isEmpty()) {
+                String search = params.getFirst("search").toLowerCase();
+                predicates.add(cb.like(
+                        cb.lower(root.get("khoaQuanLy")),
+                        "%" + search + "%"));
+                predicates.add(cb.like(
+                        cb.lower(root.get("loaiBang")),
+                        "%" + search + "%"));
+                predicates.add(cb.like(
+                        cb.lower(root.get("loaiHinhDaoTao")),
+                        "%" + search + "%"));
+                predicates.add(cb.like(
+                        cb.lower(root.get("ngonNgu")),
+                        "%" + search + "%"));
+            }
 
             // Trả về mảng các điều kiện kết hợp với AND
             return cb.and(predicates.toArray(new Predicate[0]));
