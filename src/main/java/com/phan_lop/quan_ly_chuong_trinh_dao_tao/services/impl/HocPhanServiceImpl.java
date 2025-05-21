@@ -75,6 +75,7 @@ public class HocPhanServiceImpl implements HocPhanService {
                     .soTietLyThuyet(hpDto.getSoTietLyThuyet())
                     .soTietThucHanh(hpDto.getSoTietThucHanh())
                     .maHocPhanTruoc(hpDto.getMaHocPhanTruoc())
+                    .heSo(hpDto.getHeSo())
                     .status(true).build();
             return hocPhanRepo.save(hpEntity);
 
@@ -121,6 +122,7 @@ public class HocPhanServiceImpl implements HocPhanService {
             isExistUpdateSubject.setSoTietLyThuyet(hpDto.getSoTietLyThuyet());
             isExistUpdateSubject.setSoTietThucHanh(hpDto.getSoTietThucHanh());
             isExistUpdateSubject.setStatus(hpDto.isStatus());
+            isExistUpdateSubject.setHeSo(hpDto.getHeSo());
 
             return hocPhanRepo.save(isExistUpdateSubject);
 

@@ -1,8 +1,6 @@
 package com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.request;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,6 +33,10 @@ public class HocPhanReqDto {
     @NotNull(message = "Số tiết thực hành không được để trống")
     @Positive(message = "Số tiết thực hành phải là số dương")
     private int soTietThucHanh;
+
+    @Min(value = 0, message = "He so phai giua 0 va 1")
+    @Max(value = 1, message = "He so phai giua 0 va 1")
+    private double heSo;
 
     private String maHocPhanTruoc;
 

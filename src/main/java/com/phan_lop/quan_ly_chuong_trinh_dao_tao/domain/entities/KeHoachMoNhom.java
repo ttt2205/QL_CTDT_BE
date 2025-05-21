@@ -33,8 +33,8 @@ public class KeHoachMoNhom {
     @OneToMany(mappedBy = "keHoachMoNhom", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<PhanCongGiangDay> phanCongGiangDay;
 
-    @Column(name = "he_so", nullable = false)
-    private double heSo;
+//    @Column(name = "he_so", nullable = false)
+//    private double heSo;
 
     @Column(name = "khoa", nullable = false)
     private String khoa;

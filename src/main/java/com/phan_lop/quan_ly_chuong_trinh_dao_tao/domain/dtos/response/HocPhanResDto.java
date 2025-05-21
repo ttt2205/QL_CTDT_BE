@@ -18,6 +18,7 @@ public class HocPhanResDto {
     private int soTietThucHanh;
     private String maHocPhanTruoc;
     private boolean status;
+    private double heSo;
 
     private int soTietTongCong;
 }

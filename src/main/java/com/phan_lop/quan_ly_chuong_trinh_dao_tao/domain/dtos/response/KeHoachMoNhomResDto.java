@@ -11,7 +11,7 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class KeHoachMoNhomResDto {
     private Long id;
-    private double heSo;
+//    private double heSo;
     private String khoa;
     private int tongSoNhom;
     private int tongSoSinhVien;

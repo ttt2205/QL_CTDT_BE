@@ -25,9 +25,9 @@ public class KeHoachMoNhomReqDto {
 
     @Min(value = 1, message = "Tổng số sinh viên phải lớn hơn 0")
     private int tongSoSinhVien;
-
-    @DecimalMin(value = "0.1", message = "Hệ số phải lớn hơn 0")
-    private double heSo;
+//
+//    @DecimalMin(value = "0.1", message = "Hệ số phải lớn hơn 0")
+//    private double heSo;
 
 }
 

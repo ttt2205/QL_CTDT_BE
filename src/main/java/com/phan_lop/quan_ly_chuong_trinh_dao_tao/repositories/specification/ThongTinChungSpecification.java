@@ -18,24 +18,20 @@ public class ThongTinChungSpecification {
             // Lọc mặc định: chỉ lấy sản phẩm chưa bị xóa
             predicates.add(cb.isFalse(root.get("isDeleted")));
 
-            // Nếu có query name -> thêm điều kiện LIKE (phân biệt chữ thường/chữ hoa)
             if (params.containsKey("search") && !params.getFirst("search").isEmpty()) {
                 String search = params.getFirst("search").toLowerCase();
-                predicates.add(cb.like(
-                        cb.lower(root.get("khoaQuanLy")),
-                        "%" + search + "%"));
-                predicates.add(cb.like(
-                        cb.lower(root.get("loaiBang")),
-                        "%" + search + "%"));
-                predicates.add(cb.like(
-                        cb.lower(root.get("loaiHinhDaoTao")),
-                        "%" + search + "%"));
-                predicates.add(cb.like(
-                        cb.lower(root.get("ngonNgu")),
-                        "%" + search + "%"));
+                // Tạo danh sách các điều kiện OR
+                List<Predicate> orPredicates = new ArrayList<>();
+                orPredicates.add(cb.like(cb.lower(root.get("khoaQuanLy")), "%" + search + "%"));
+                orPredicates.add(cb.like(cb.lower(root.get("loaiBang")), "%" + search + "%"));
+                orPredicates.add(cb.like(cb.lower(root.get("loaiHinhDaoTao")), "%" + search + "%"));
+                orPredicates.add(cb.like(cb.lower(root.get("ngonNgu")), "%" + search + "%"));
+
+                // Kết hợp các điều kiện OR vào một predicate duy nhất
+                predicates.add(cb.or(orPredicates.toArray(new Predicate[0])));
             }
 
-            // Trả về mảng các điều kiện kết hợp với AND
+            // Trả về các điều kiện kết hợp với AND
             return cb.and(predicates.toArray(new Predicate[0]));
         };
     }

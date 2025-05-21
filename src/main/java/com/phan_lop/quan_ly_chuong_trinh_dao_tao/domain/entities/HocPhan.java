@@ -48,8 +48,8 @@ public class HocPhan {
     @Column(name = "ma_hoc_phan_truoc", nullable = true)
     private String maHocPhanTruoc;
 
-    // @Column(name = "he_so_hoc_phan", nullable = false)
-    // private int heSoHocPhan;
+     @Column(name = "he_so_hoc_phan", nullable = false)
+     private double heSo;
 
     @Column(name = "status", nullable = false)
     private boolean status;

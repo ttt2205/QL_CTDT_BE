@@ -22,4 +22,5 @@ public class HocPhanDto {
     private String maHocPhanTruoc;
     private boolean status;
     private boolean isDeleted;
+    private double heSo;
 }

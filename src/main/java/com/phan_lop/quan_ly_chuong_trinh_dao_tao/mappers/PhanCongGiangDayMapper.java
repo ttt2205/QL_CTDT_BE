@@ -27,7 +27,7 @@ public interface PhanCongGiangDayMapper {
 
     @Named("tinhSoTietThucTe")
     default int tinhSoTietThucTe(PhanCongGiangDay entity) {
-        return (int) Math.round(entity.getSoTietThucHien() * entity.getKeHoachMoNhom().getHeSo());
+        return (int) Math.round(entity.getSoTietThucHien() * entity.getKeHoachMoNhom().getHocPhan().getHeSo());
     }
 
     @Named("xacDinhNhom")
