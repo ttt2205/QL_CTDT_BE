@@ -21,18 +21,13 @@ public class ThongTinChungSpecification {
             // Nếu có query name -> thêm điều kiện LIKE (phân biệt chữ thường/chữ hoa)
             if (params.containsKey("search") && !params.getFirst("search").isEmpty()) {
                 String search = params.getFirst("search").toLowerCase();
-                predicates.add(cb.like(
-                        cb.lower(root.get("khoaQuanLy")),
-                        "%" + search + "%"));
-                predicates.add(cb.like(
-                        cb.lower(root.get("loaiBang")),
-                        "%" + search + "%"));
-                predicates.add(cb.like(
-                        cb.lower(root.get("loaiHinhDaoTao")),
-                        "%" + search + "%"));
-                predicates.add(cb.like(
-                        cb.lower(root.get("ngonNgu")),
-                        "%" + search + "%"));
+                Predicate searchPredicate = cb.or(
+                        cb.like(cb.lower(root.get("khoaQuanLy")), "%" + search + "%"),
+                        cb.like(cb.lower(root.get("loaiBang")), "%" + search + "%"),
+                        cb.like(cb.lower(root.get("loaiHinhDaoTao")), "%" + search + "%"),
+                        cb.like(cb.lower(root.get("ngonNgu")), "%" + search + "%"));
+
+                predicates.add(searchPredicate);
             }
 
             // Trả về mảng các điều kiện kết hợp với AND
