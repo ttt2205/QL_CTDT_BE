@@ -210,13 +210,15 @@ public class ThongTinChungServiceImpl implements ThongTinChungService {
                         } else {
                             int soTinChiBatBuoc = 0;
                             int soTinChiTuChon = 0;
+                            int soTinChiTuChonToiThieu = nhomKienThuc.getSoTinChiTuChonToiThieu();
                             for (KeHoachDayHoc keHoachDayHoc : listKeHoachDayHocByNhomKienThuc) {
                                 HocPhan hocPhanByIdOfKeHoachDayHoc = keHoachDayHoc.getHocPhan();
                                 if (hocPhanByIdOfKeHoachDayHoc != null) {
-                                    if (!keHoachDayHoc.isBatBuoc()) {
+                                    if (keHoachDayHoc.isBatBuoc()) {
+                                        soTinChiBatBuoc += hocPhanByIdOfKeHoachDayHoc.getSoTinChi();
+                                    } else {
                                         soTinChiTuChon += hocPhanByIdOfKeHoachDayHoc.getSoTinChi();
                                     }
-                                    soTinChiBatBuoc += hocPhanByIdOfKeHoachDayHoc.getSoTinChi();
                                 }
                             }
 
@@ -227,6 +229,8 @@ public class ThongTinChungServiceImpl implements ThongTinChungService {
                                             soTinChiBatBuoc)
                                     .soTinChiTuChon(
                                             soTinChiTuChon)
+                                    .soTinChiToiThieu(
+                                            soTinChiTuChonToiThieu)
                                     .build());
                         }
 

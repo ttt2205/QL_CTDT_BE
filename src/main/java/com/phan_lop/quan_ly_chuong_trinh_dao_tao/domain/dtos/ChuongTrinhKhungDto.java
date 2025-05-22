@@ -26,5 +26,6 @@ public class ChuongTrinhKhungDto {
         private boolean tichLuy;
         private int soTinChiBatBuoc;
         private int soTinChiTuChon;
+        private int soTinChiToiThieu;
     }
 }

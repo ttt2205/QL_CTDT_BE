@@ -20,15 +20,13 @@ public class ThongTinChungSpecification {
 
             if (params.containsKey("search") && !params.getFirst("search").isEmpty()) {
                 String search = params.getFirst("search").toLowerCase();
-                // Tạo danh sách các điều kiện OR
-                List<Predicate> orPredicates = new ArrayList<>();
-                orPredicates.add(cb.like(cb.lower(root.get("khoaQuanLy")), "%" + search + "%"));
-                orPredicates.add(cb.like(cb.lower(root.get("loaiBang")), "%" + search + "%"));
-                orPredicates.add(cb.like(cb.lower(root.get("loaiHinhDaoTao")), "%" + search + "%"));
-                orPredicates.add(cb.like(cb.lower(root.get("ngonNgu")), "%" + search + "%"));
+                Predicate searchPredicate = cb.or(
+                        cb.like(cb.lower(root.get("khoaQuanLy")), "%" + search + "%"),
+                        cb.like(cb.lower(root.get("loaiBang")), "%" + search + "%"),
+                        cb.like(cb.lower(root.get("loaiHinhDaoTao")), "%" + search + "%"),
+                        cb.like(cb.lower(root.get("ngonNgu")), "%" + search + "%"));
 
-                // Kết hợp các điều kiện OR vào một predicate duy nhất
-                predicates.add(cb.or(orPredicates.toArray(new Predicate[0])));
+                predicates.add(searchPredicate);
             }
 
             // Trả về các điều kiện kết hợp với AND
