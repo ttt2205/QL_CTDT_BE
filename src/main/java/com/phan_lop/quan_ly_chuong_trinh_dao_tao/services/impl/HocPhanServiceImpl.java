@@ -71,6 +71,7 @@ public class HocPhanServiceImpl implements HocPhanService {
             HocPhan hpEntity = HocPhan.builder()
                     .maHocPhan(hpDto.getMaHocPhan())
                     .tenHocPhan(hpDto.getTenHocPhan())
+                    .soTinChi(hpDto.getSoTinChi())
                     .soTietBaiTap(hpDto.getSoTietBaiTap())
                     .soTietLyThuyet(hpDto.getSoTietLyThuyet())
                     .soTietThucHanh(hpDto.getSoTietThucHanh())
@@ -118,6 +119,7 @@ public class HocPhanServiceImpl implements HocPhanService {
 
             isExistUpdateSubject.setMaHocPhan(hpDto.getMaHocPhan());
             isExistUpdateSubject.setTenHocPhan(hpDto.getTenHocPhan());
+            isExistUpdateSubject.setSoTinChi(hpDto.getSoTinChi());
             isExistUpdateSubject.setSoTietBaiTap(hpDto.getSoTietBaiTap());
             isExistUpdateSubject.setSoTietLyThuyet(hpDto.getSoTietLyThuyet());
             isExistUpdateSubject.setSoTietThucHanh(hpDto.getSoTietThucHanh());
