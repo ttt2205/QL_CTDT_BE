@@ -4,11 +4,13 @@ import com.phan_lop.quan_ly_chuong_trinh_dao_tao.services.UserService;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.request.UserReqDto;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.domain.dtos.response.UserResDto;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/v1/user")
 public class UserController {
@@ -24,8 +26,9 @@ public class UserController {
         return ResponseEntity.ok(createdUser);
     }
     @GetMapping
-    public List<UserResDto> getAllUsers() {
-        return userService.getAllUsers();
+    public List<UserResDto> getAllUsers(@RequestParam(defaultValue = "") String keyword) {
+//        log.info(keyword);
+        return userService.findByKeyword(keyword);
     }
 
     @GetMapping("{id}")

@@ -8,11 +8,13 @@ import com.phan_lop.quan_ly_chuong_trinh_dao_tao.exception.BadRequestException;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.mappers.UserMapper;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.repositories.UserRepository;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.services.UserService;
+import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.phan_lop.quan_ly_chuong_trinh_dao_tao.utils.PasswordUtils;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 @Transactional
@@ -82,5 +84,13 @@ public class UserServiceImpl implements UserService {
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy người dùng"));
         return UserMapper.toResponse(user);
+    }
+
+    @Override
+    public List<UserResDto> findByKeyword(String keyword) {
+        return userRepository.findByKeyword(keyword).stream()
+                .filter(user -> !user.isDeleted())
+                .map(UserMapper::toResponse)
+                .toList();
     }
 }

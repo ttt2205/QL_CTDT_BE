@@ -11,4 +11,5 @@ public interface UserService {
     UserResDto updateUser(Long id, UserReqDto request);
     void deleteUser(Long id);
     UserResDto getUserById(Long id);
+    List<UserResDto> findByKeyword(String keyword);
 }
